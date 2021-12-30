@@ -1,0 +1,42 @@
+{
+    "name": "felipedamacenoteodoro/makeservicerepository",
+    "description": "Generate service and repository file and interface",
+    "keywords": [
+        "generators",
+        "artisan",
+        "make",
+        "service",
+        "repository"
+    ],
+    "homepage": "https://github.com/felipedamacenoteodoro/makeservicerepository",
+    "license": "gpl",
+    "authors": [
+        {
+            "name": "Felipe D. Teodoro",
+            "email": "felipe.devops@gmail.com",
+            "homepage": "https://www.linkedin.com/in/felipedamacenoteodoro",
+            "role": "Lead Developer & Maintainer"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit" : "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "FelipeDamacenoTeodoro\\MakeServiceRepository\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "FelipeDamacenoTeodoro\\MakeServiceRepository\\MakeServiceRepositoryServiceProvider"
+            ]
+        }
+    }
+}

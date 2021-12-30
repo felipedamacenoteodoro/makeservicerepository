@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Contracts\Repositories;
+
+interface DummyRepositoryContract
+{
+    public function find(string $id): ?object;
+
+	public function getAll(): ?object;
+
+	public function create(array $data): ?object;
+
+	public function update(array $data): ?object;
+
+    public function delete(string $id): bool;
+}

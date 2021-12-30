@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Services;
+
+use App\Contracts\Repositories\DummyRepositoryInterface;
+use App\Models\DummyModel;
+
+class DummyRepository implements DummyRepositoryInterface
+{
+
+    protected $model;
+
+    public function __construct(DummyModel $model) {
+        $this->model = $model;
+    }
+
+    public function find(string $id): ?object {
+        return $this->model->find($id);
+    }
+
+	public function getAll(): ?object{
+        return $this->model->get();
+    }
+
+	public function create(array $data): ?object{
+        return $this->model->create($data);
+    }
+
+	public function update(array $data): ?object{
+        return $this->model->where('id', $data['id'])->update($data);
+    }
+
+    public function delete(string $id): bool{
+        return $this->model->delete($id);
+    }
+}

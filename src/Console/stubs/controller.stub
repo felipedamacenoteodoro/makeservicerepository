@@ -1,0 +1,85 @@
+<?php
+
+namespace DummyNamespace;
+
+use Auth;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+/**
+ * Class DummyClassController
+ */
+class DummyClassController extends BaseController
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    //  private $service;
+
+    //  public function __construct(serviceInterface $service)
+    //  {
+    //      $this->service = $service;
+    //  }
+
+    public function index()
+    {
+
+        // $list = $this->service->ListPaginate();
+
+        // return view(package_name_view('index'), compact('list'));
+    }
+
+    public function create(Request $request)
+    {
+        // try {
+
+        //     DB::beginTransaction();
+
+        //     if (!$this->service->create($request->all())) {
+        //         DB::rollBack();
+        //         return message_error();
+        //     }
+
+        //     DB::commit();
+
+        //     return redirect()->route('package_name.index')->with('sucesso', Lang::get(package_name_trans('messages.operation_success')));
+        // } catch (Exception $exception) {
+        //     DB::rollBack();
+        //     Log::info(__CLASS__ . ' ' . __FUNCTION__ . ' ' . $exception->getMessage());
+        //     return message_error();
+        // }
+    }
+
+    public function destroy(Request $request)
+    {
+        // try {
+        //     DB::beginTransaction();
+
+        //     if (!$this->service->destroy($request->validated())) {
+        //         DB::rollBack();
+        //         return message_error();
+        //     }
+
+        //     DB::commit();
+        //     return message_success();
+        // } catch (\Exception $exception) {
+        //     \Log::info(__CLASS__ . ' ' . __FUNCTION__ . ' ' . $exception->getMessage());
+        //     DB::rollBack();
+        //     return message_error();
+        // }
+    }
+
+    public function filtrar(Request $request)
+    {
+
+        // $filter = $this->service->filtrar($request->validated());
+
+        // return view(package_name_view('index'), compact('filter'));
+    }
+}
