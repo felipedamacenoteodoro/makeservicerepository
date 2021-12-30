@@ -9,7 +9,7 @@
         "repository"
     ],
     "homepage": "https://github.com/felipedamacenoteodoro/makeservicerepository",
-    "license": "gpl",
+    "license": "MIT",
     "authors": [
         {
             "name": "Felipe D. Teodoro",
