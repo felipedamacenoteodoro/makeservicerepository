@@ -35,11 +35,11 @@ class MakeServiceRepositoryCrud extends Command
         $name = (string) $this->argument('name');
         $nameTitle = ucfirst(Str::camel($name));
 
-        $this->call('make:repositoryi', ['name' => $nameTitle]);
+        $this->call('make:repository', ['name' => $nameTitle, '--interface'=> true]);
         $this->call('make:repository', ['name' => $nameTitle]);
 
         // Create a service interface and repository
-        $this->call('make:servicei', ['name' => $nameTitle]);
+        $this->call('make:service', ['name' => $nameTitle, '--interface'=> true]);
         $this->call('make:service', ['name' => $nameTitle]);
     }
 }

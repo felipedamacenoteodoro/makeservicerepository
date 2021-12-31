@@ -4,6 +4,7 @@ namespace FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Support\Str;
 
 class MakeRepository extends GeneratorCommand
@@ -13,10 +14,10 @@ class MakeRepository extends GeneratorCommand
 	 *
 	 * @var string
 	 */
-	protected $name = 'make:repository';
+	protected $name = 'make:repository {--interface}';
 
     private $complementaryInterfaceName = 'RepositoryInterface';
-    private $complementaryServiceName = 'Repository';
+    private $complementaryRepositoryName = 'Repository';
 
 	/**
 	 * The console command description.
@@ -44,10 +45,25 @@ class MakeRepository extends GeneratorCommand
 
         $stub = parent::replaceClass($stub, $name);
 
+        if($this->option('interface'))
+        {
+            return $this->replaceClassInterface($stub);
+        }
+
+        return $this->replaceClasses($stub);
+    }
+
+    private function replaceClassInterface($stub)
+    {
+        return str_replace('DummyRepositoryContract', $this->argument('name').$this->complementaryInterfaceName, $stub);
+    }
+
+    private function replaceClasses ($stub){
+
         $stub = str_replace('DummyRepositoryInterface', $this->argument('name').$this->complementaryInterfaceName, $stub);
         $stub = str_replace('DummyModel', $this->argument('name'), $stub);
 
-        return str_replace('DummyRepository', $this->argument('name').$this->complementaryServiceName, $stub);
+        return str_replace('DummyRepository', $this->argument('name').$this->complementaryRepositoryName, $stub);
     }
 
      /**
@@ -58,7 +74,8 @@ class MakeRepository extends GeneratorCommand
      */
     protected function getPath($name)
     {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name.$this->complementaryServiceName);
+        $complementName = ($this->option('interface')) ? $name.$this->complementaryInterfaceName : $name.$this->complementaryRepositoryName;
+        $name = Str::replaceFirst($this->rootNamespace(), '', $complementName);
 
         return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
     }
@@ -70,7 +87,14 @@ class MakeRepository extends GeneratorCommand
 	 */
 	protected function getStub()
 	{
-		return  __DIR__ . '/../stubs/make-repository.stub';
+        if($this->option('interface'))
+        {
+            $this->type = $this->complementaryInterfaceName;
+            return  __DIR__ . '/../stubs/make-repository-interface.stub';
+        }
+
+        $this->type = $this->complementaryRepositoryName;
+        return  __DIR__ . '/../stubs/make-repository.stub';
 	}
 
 	/**
@@ -81,7 +105,12 @@ class MakeRepository extends GeneratorCommand
 	 */
 	protected function getDefaultNamespace($rootNamespace)
 	{
-		return $rootNamespace . '\Repositories';
+        if($this->option('interface'))
+        {
+		    return $rootNamespace . '\Contracts\Repositories';
+        }
+
+        return $rootNamespace . '\Repositories';
 	}
 
     /**
@@ -93,6 +122,14 @@ class MakeRepository extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the repository.'],
+        ];
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Create the class even if it already exists'],
+            ['interface', null, InputOption::VALUE_NONE, 'Create the interface class for repository']
         ];
     }
 }

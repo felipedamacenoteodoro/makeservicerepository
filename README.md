@@ -24,13 +24,13 @@ php artisan make:crudsrv {Entity_name}
 - Generate a Repository Interface
 
 ``` bash
-php artisan make:repositoryi {Entity_name}
+php artisan make:repository --interface {Entity_name}
 ```
 
 - Generate a Service Interface
 
 ``` bash
-php artisan make:servicei {Entity_name}
+php artisan make:service --interface {Entity_name}
 ```
 
 - Generate a Service
@@ -52,6 +52,8 @@ You need to map the interface bind on your application server provider.
 - **Exemple:**
 
 Add In the boot method of your service provider `app/Providers/AppServiceProvider.php`:
+
+- add on boot method
 
 ```php
 $this->app->bind(YourEntityCreatedServiceInterface::class, YourEntityCreatedService::class);
