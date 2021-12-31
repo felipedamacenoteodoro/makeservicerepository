@@ -2,9 +2,11 @@
 
 namespace FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Str;
+use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+
 
 class MakeService extends GeneratorCommand
 {
@@ -47,6 +49,7 @@ class MakeService extends GeneratorCommand
 
         $stub = str_replace('DummyRepositoryInterface', $this->argument('name').$this->complementaryRepositoryInterfaceName, $stub);
         $stub = str_replace('DummyServiceInterface', $this->argument('name').$this->complementaryInterfaceName, $stub);
+        $stub = str_replace('DummyContract', $this->argument('name').$this->complementaryInterfaceName, $stub);
 
         return str_replace('DummyService', $this->argument('name').$this->complementaryServiceName, $stub);
     }
@@ -59,7 +62,8 @@ class MakeService extends GeneratorCommand
      */
     protected function getPath($name)
     {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name.$this->complementaryServiceName);
+        $complementName = ($this->option('interface')) ? $name.$this->complementaryInterfaceName : $name.$this->complementaryServiceName;
+        $name = Str::replaceFirst($this->rootNamespace(), '', $complementName);
 
         return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
     }
@@ -71,7 +75,14 @@ class MakeService extends GeneratorCommand
 	 */
 	protected function getStub()
 	{
-		return  __DIR__ . '/../stubs/make-service.stub';
+        if($this->option('interface'))
+        {
+            $this->type = $this->complementaryInterfaceName;
+		    return  __DIR__ . '/../stubs/make-service-interface.stub';
+        }
+
+        $this->type = $this->complementaryServiceName;
+        return  __DIR__ . '/../stubs/make-service.stub';
 	}
 
 	/**
@@ -82,6 +93,11 @@ class MakeService extends GeneratorCommand
 	 */
 	protected function getDefaultNamespace($rootNamespace)
 	{
+        if($this->option('interface'))
+        {
+            return $rootNamespace . '\Contracts\Services';
+        }
+
 		return $rootNamespace . '\Services';
 	}
 
@@ -94,6 +110,14 @@ class MakeService extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the contract.'],
+        ];
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['force', null, InputOption::VALUE_NONE, 'Create the class even if it already exists'],
+            ['interface', null, InputOption::VALUE_NONE, 'Create the interface class for repository']
         ];
     }
 }

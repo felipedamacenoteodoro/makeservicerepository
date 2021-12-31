@@ -14,3 +14,9 @@ Starting with version 1, the changelog is kept inside the Releases tab in our th
 
 ### Added
 - Maker for CRUD files: make:crudsrv, make:repositoryi, make:servicei, make:repository and make:service
+
+## 1.0.1 - 2021-12-30
+
+### MOdify
+- Modify params of files make repository and make service
+- Maker for CRUD files: make:crudsrv, make:repository --interface, make:repository, make:service --interface and make:service

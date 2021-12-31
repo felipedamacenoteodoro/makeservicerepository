@@ -12,9 +12,7 @@ use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeServiceRepo
 class MakeServiceRepositoryServiceProvider extends ServiceProvider
 {
     protected $commands = [
-        MakeServiceContract::class,
         MakeService::class,
-        MakeRepositoryContract::class,
         MakeRepository::class,
         MakeServiceRepositoryCrud::class,
     ];
