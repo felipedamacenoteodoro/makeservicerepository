@@ -10,6 +10,15 @@ Via Composer
 composer require felipedamacenoteodoro/makeservicerepository --dev
 ```
 
+## Custom directory
+
+Publish the config file and customize your service and repository folder
+
+``` bash
+php artisan vendor:publish --tag=makeservicerepository-config
+
+```
+
 ## Usage
 
 Open the console and enter one of the commands:
