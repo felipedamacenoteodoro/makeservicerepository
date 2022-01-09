@@ -21,25 +21,25 @@ php artisan make:crudsrv {Entity_name}
 
 ```
 
-- Generate a Repository Interface
+- Generate only Repository Interface class
 
 ``` bash
-php artisan make:repository --interface {Entity_name}
+php artisan make:repository {Entity_name} --interface 
 ```
 
-- Generate a Service Interface
+- Generate only Service Interface class
 
 ``` bash
-php artisan make:service --interface {Entity_name}
+php artisan make:service {Entity_name} --interface
 ```
 
-- Generate a Service
+- Generate a Service, You will be asked if you want to create the interface too
 
 ``` bash
 php artisan make:service {Entity_name}
 ``` 
 
-- Generate a Repository file
+- Generate a Repository, You will be asked if you want to create the interface too
 
 ``` bash
 php artisan make:repository {Entity_name}
