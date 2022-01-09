@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace DummyNamespace;
 
-use App\Contracts\Repositories\DummyRepositoryInterface;
+use DummyRepositoryInterfaceNamespace\DummyRepositoryInterface;
 use App\Models\DummyModel;
 
 class DummyRepository implements DummyRepositoryInterface

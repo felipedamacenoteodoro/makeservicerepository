@@ -5,13 +5,17 @@ namespace FelipeDamacenoTeodoro\MakeServiceRepository;
 use Illuminate\Support\ServiceProvider;
 use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeRepository;
 use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeRepositoryContract;
+use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeRepositoryPattern;
 use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeService;
 use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeServiceContract;
+use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeServicePattern;
 use FelipeDamacenoTeodoro\MakeServiceRepository\Console\Commands\MakeServiceRepositoryCrud;
 
 class MakeServiceRepositoryServiceProvider extends ServiceProvider
 {
     protected $commands = [
+        MakeServicePattern::class,
+        MakeRepositoryPattern::class,
         MakeService::class,
         MakeRepository::class,
         MakeServiceRepositoryCrud::class,

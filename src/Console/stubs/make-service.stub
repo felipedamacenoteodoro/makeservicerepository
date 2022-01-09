@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace DummyNamespace;
 
-use App\Contracts\Services\DummyServiceInterface;
-use App\Contracts\Repositories\DummyRepositoryInterface;
+use DummyServiceInterfacePath\DummyServiceInterface;
+use DummyRepositoryInterfacePath\DummyRepositoryInterface;
 
 class DummyService implements DummyServiceInterface
 {
